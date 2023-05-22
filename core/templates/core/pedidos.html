@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block contenido %}
+<body>
+    <br>
+    <div class="col-lg-10 mx-auto">
+        <div class="card-body">
+            <table class="table table-responsive-sm">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;" scope="col">Nombre del producto:</th>
+                    <th style="text-align: center;" scope="col">Imagen:</th>
+                    <th style="text-align: center;" scope="col">Precio:</th>
+                    <th style="text-align: center;" scope="col">Fecha de compra:</th>
+                    <th style="text-align: center;" scope="col">Fecha de entrega:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for aux in listaProductos %}
+                    <tr>
+                        <td> - {{ aux.nombre }}</td>
+                        <td style="text-align: center;">
+                            {% if aux.imagen %}
+                                <img src="{{ aux.imagen.url }}" alt="Card image" style="height: 100px; text-align: center;"></td>
+                            {% else %}
+                                <img src="{% static 'core/img/logo.jpg' %}" alt="Sin imagen" style="height: 100px;">
+                                <h6>No imagen</h6>
+                            {% endif %}
+                        <td style="text-align: center;">{{ aux.precio | intcomma }}</td>
+                        <td style="text-align: center;">fecha</td>
+                        <td style="text-align: center;">fecha</td>
+                    </tr>
+                        {% endfor %}
+                </tbody>
+              </table>
+        </div>
+        <div class="d-flex justify-content-center mb-2">
+            <a type="button" class="btn btn-success ms-1" href="{% url 'perfil' %}">Volver al perfil</a>
+        </div>
+    </div>
+</body>
+{% endblock contenido %}
